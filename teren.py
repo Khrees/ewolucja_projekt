@@ -2,21 +2,20 @@ __author__ = 'illmoded'
 
 
 class Teren(object):
-    def __init__(self, pozycja):
+    def __init__(self, pozycja=0):
         self.pozycja = pozycja
 
 
 class Pustynia(Teren):
-    def __init__(self, pozycja):
-        super(Pustynia, self).__init__(pozycja) #co to jest??????
+    def __init__(self, pozycja=0):
+        Teren.__init__(self, pozycja=0)
         self.pozycja = pozycja
-        self.sznsa_na_wzrost = 1
-    pass
+        self.sznsa_na_wzrost = 5
 
 
 class Dzunkla(Teren):
-    def __init__(self, pozycja):
-        super(Dzunkla, self).__init__(pozycja)
+    def __init__(self, pozycja=0):
+        Teren.__init__(self, pozycja=0)
         self.pozycja = pozycja
         self.szansa_na_wzrost = 20
-    pass
+

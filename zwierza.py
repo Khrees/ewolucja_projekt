@@ -2,7 +2,7 @@ __author__ = 'illmoded'
 
 
 class Zwierz(object):
-    def __init__(self, id, pozycja, genom, energia=0, czas_zycia=0):
+    def __init__(self, id=0, pozycja=0, genom=0, energia=100, czas_zycia=0):
         self.id = id
         self.energia = energia
         self.czas_zycia = czas_zycia
@@ -25,7 +25,7 @@ class Zwierz(object):
             self.rozmnazaj_sie()
 
     def jedz(self, drzewo):
-        # to by tez dzialalo na zjadanie innych stworow, bo maja energie!!!
+        # to by tez dzialalo na zjadanie innych stworow, bo maja energie!!! (prawdopodobnie)
         self.energia += drzewo.energia
         drzewo.energia = 0
         # cos z energia z drzewa
