@@ -23,7 +23,7 @@ for x in range(rozmiar):
         # print(ziemia[x][y].pozycja)
 
 listazwieraat = []
-zwierz = zwierza.Zwierz()
+zwierz = zwierza.Zwierz(1) #bedzie zle, musi dalej byc copy
 
 #tu jeszcze while ogolny
 while len(listazwieraat)<100: #generuje
