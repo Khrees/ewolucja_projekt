@@ -2,17 +2,14 @@ __author__ = 'illmoded'
 
 
 class Zwierz(object):
-    def __init__(self, id, energia=100, czas_zycia=0):
-        self.id = id
+    def __init__(self,pozycja=0,x=0,y=0,idz=0, energia=100, czas_zycia=0):
+        self.idz = idz
         self.energia = energia
         self.czas_zycia = czas_zycia
-
-        x = 0
-        y = 0
-
+        self.pozycja =pozycja
         self.pozycja.x = x
         self.pozycja.y = y
-
+        # self.genom
         self.genom.kierunek =['N','E','W','S','NE','NW','SE','SW']
         self.genom.dl = []
 
