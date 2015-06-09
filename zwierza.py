@@ -2,15 +2,14 @@ __author__ = 'illmoded'
 
 
 class Zwierz(object):
-    def __init__(self,pozycja=0,x=0,y=0,idz=0, energia=100, czas_zycia=0):
+    def __init__(self, pozycja=0, x=0, y=0, idz=0, energia=100, czas_zycia=0):
         self.idz = idz
         self.energia = energia
         self.czas_zycia = czas_zycia
-        self.pozycja =pozycja
+        self.pozycja = pozycja
         self.x = x
         self.y = y
-        self.genom=[]
-
+        self.genom = []
 
     # def rozmnazaj_sie(self):  # cos tu ma byc...
     #     pass  # pass to odpowiednik NULL dla funkcji btw

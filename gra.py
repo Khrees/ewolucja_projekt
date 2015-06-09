@@ -5,21 +5,21 @@ import teren
 import copy
 import random as r
 
-p= teren.Pustynia()
-d= teren.Dzunkla()
+p = teren.Pustynia()
+d = teren.Dzunkla()
 
-rozmiar=100
+rozmiar = 100
 ziemia = [[0 for x in range(rozmiar)] for y in range(rozmiar)]
 
 #nie wiem po co takie cos, ale jest...
 for x in range(rozmiar):
     for y in range(rozmiar):
-        if 60 > x >40 and 60 > y > 40:
+        if 60 > x > 40 and 60 > y > 40:
             ziemia[x][y]=(copy.deepcopy(d))
-            ziemia[x][y].pozycja=x,y
+            ziemia[x][y].pozycja = x,y
         else:
             ziemia[x][y]=(copy.deepcopy(p))
-            ziemia[x][y].pozycja=x,y
+            ziemia[x][y].pozycja = x,y
         # print(ziemia[x][y].pozycja)
 
 listazwieraat = []
@@ -34,10 +34,11 @@ for zwierze in listazwieraat: #modyfikuje
     zwierze.x = r.randint(0,rozmiar)
     zwierze.y = r.randint(0,rozmiar)
 
-    #to powinno byc jako slownik, nie jako lista
-    zwierze.id = zwierze #adres w pamieci, powinien byc unikatowy
-    # for i in xrange[8]:
-    #     zwierze.genom[i] = r.randint(-10, 10)
+    zwierze.id = zwierze  #adres w pamieci, powinien byc unikatowy!!!!!!!!!!!!!
+
+    for i in xrange(8):
+        zwierze.genom.append(r.randint(-10,10))
+
 
 
 # tak wyglada wzrost drzew
