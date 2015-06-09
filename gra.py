@@ -1,7 +1,6 @@
 __author__ = 'illmoded'
 
 import zwierza
-# import roslinki
 import teren
 import copy
 import random as r
@@ -42,5 +41,20 @@ for zwierze in listazwieraat: #modyfikuje
     SE=r.randint(0,10)
     SW=r.randint(0,10)
 
-    zwierze.genom=[N,E,W,S,NE,NW,SE,SW]
-    zwierze.id = zwierze
+    zwierze.genom=[N,E,W,S,NE,NW,SE,SW] #to powinno byc jako slownik, nie jako lista
+    zwierze.id = zwierze #adres w pamieci, powinien byc unikatowy
+
+
+# tak wyglada wzrost drzew
+los=0
+for x in range(rozmiar):
+    for y in range(rozmiar):
+
+        los=r.randint(0,100)
+
+        if ziemia[x][y].szansa_na_wzrost > los:
+            ziemia[x][y].rosnie_drzewo()
+
+        # print(los, ziemia[x][y].szansa_na_wzrost,ziemia[x][y].szansa_na_wzrost>los,ziemia[x][y].energia)
+
+
