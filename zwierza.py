@@ -7,14 +7,13 @@ class Zwierz(object):
         self.energia = energia
         self.czas_zycia = czas_zycia
         self.pozycja =pozycja
-        self.pozycja.x = x
-        self.pozycja.y = y
-        # self.genom
-        self.genom.kierunek =['N','E','W','S','NE','NW','SE','SW']
-        self.genom.dl = []
+        self.x = x
+        self.y = y
+        self.genom=[]
 
-    def rozmnazaj_sie(self):  # cos tu ma byc...
-        pass  # pass to odpowiednik NULL dla funkcji btw
+
+    # def rozmnazaj_sie(self):  # cos tu ma byc...
+    #     pass  # pass to odpowiednik NULL dla funkcji btw
 
     def rusz_sie(self):
         # cos z pozycja
@@ -26,7 +25,7 @@ class Zwierz(object):
         self.energia -= 1
         if self.czas_zycia > 100 and self.energia > 200:
             self.energia /= 2
-            self.rozmnazaj_sie()
+            # self.rozmnazaj_sie()
 
     def jedz(self, drzewo):
         # to by tez dzialalo na zjadanie innych stworow, bo maja energie!!! (prawdopodobnie)

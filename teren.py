@@ -2,13 +2,14 @@ __author__ = 'illmoded'
 
 
 class Teren(object):
-    def __init__(self, pozycja=0,energia=0):
+    def __init__(self, pozycja =0, energia =0):
         self.pozycja = pozycja
         self.energia = energia
 
 
+    # @property
     def rosnie_drzewo(self):
-        self.energia+=10
+        self.energia += 10
         return 1
 
 
