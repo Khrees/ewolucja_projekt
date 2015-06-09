@@ -2,12 +2,19 @@ __author__ = 'illmoded'
 
 
 class Zwierz(object):
-    def __init__(self, id=0, pozycja=0, genom=0, energia=100, czas_zycia=0):
+    def __init__(self, id, energia=100, czas_zycia=0):
         self.id = id
         self.energia = energia
         self.czas_zycia = czas_zycia
-        self.pozycja = pozycja  # moze niekoniecznie jako tuple
-        self.genom = genom
+
+        x = 0
+        y = 0
+
+        self.pozycja.x = x
+        self.pozycja.y = y
+
+        self.genom.kierunek =['N','E','W','S','NE','NW','SE','SW']
+        self.genom.dl = []
 
     def rozmnazaj_sie(self):  # cos tu ma byc...
         pass  # pass to odpowiednik NULL dla funkcji btw
@@ -21,7 +28,7 @@ class Zwierz(object):
         self.rusz_sie()
         self.energia -= 1
         if self.czas_zycia > 100 and self.energia > 200:
-            self.czas_zycia = 0
+            self.energia /= 2
             self.rozmnazaj_sie()
 
     def jedz(self, drzewo):

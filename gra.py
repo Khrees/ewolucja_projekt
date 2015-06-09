@@ -22,27 +22,22 @@ for x in range(rozmiar):
             ziemia[x][y].pozycja=x,y
         # print(ziemia[x][y].pozycja)
 
-listazwieraat=[]
-zwierz=zwierza.Zwierz()
+listazwieraat = []
+zwierz = zwierza.Zwierz()
 
 #tu jeszcze while ogolny
 while len(listazwieraat)<100: #generuje
     listazwieraat.append(zwierz)
 
 for zwierze in listazwieraat: #modyfikuje
-    zwierze.pozycja= [r.randint(0,100),r.randint(0,100)]
 
-    N=r.randint(0,10)
-    E=r.randint(0,10)
-    W=r.randint(0,10)
-    S=r.randint(0,10)
-    NE=r.randint(0,10)
-    NW=r.randint(0,10)
-    SE=r.randint(0,10)
-    SW=r.randint(0,10)
+    zwierze.pozycja.x=r.randint(0,rozmiar)
+    zwierze.pozycja.y=r.randint(0,rozmiar)
 
-    zwierze.genom=[N,E,W,S,NE,NW,SE,SW] #to powinno byc jako slownik, nie jako lista
+    #to powinno byc jako slownik, nie jako lista
     zwierze.id = zwierze #adres w pamieci, powinien byc unikatowy
+    for i in xrange[8]:
+        zwierze.genom.dl[i] = r.randint(-10, 10)
 
 
 # tak wyglada wzrost drzew
@@ -50,11 +45,38 @@ los=0
 for x in range(rozmiar):
     for y in range(rozmiar):
 
-        los=r.randint(0,100)
+        los = r.randint(0,100)
 
         if ziemia[x][y].szansa_na_wzrost > los:
             ziemia[x][y].rosnie_drzewo()
 
         # print(los, ziemia[x][y].szansa_na_wzrost,ziemia[x][y].szansa_na_wzrost>los,ziemia[x][y].energia)
 
+# ruch zwierzat
+for zwierz in listazwieraat:
+    wybor = r.choice(zwierz.genom.kierunek)
+    if wybor == 'N':
+        zwierz.pozycja.x += 0
+        zwierz.pozycja.y += zwierz.genom.dl[0]
+    elif wybor == 'E':
+        zwierz.pozycja.x += zwierz.genom.dl[1]
+        zwierz.pozycja.y += 0
+    elif wybor == 'W':
+        zwierz.pozycja.x += zwierz.genom.dl[2]
+        zwierz.pozycja.y += 0
+    elif wybor == 'S':
+        zwierz.pozycja.x += 0
+        zwierz.pozycja.y += zwierz.genom.dl[3]
+    elif wybor == 'NE':
+        zwierz.pozycja.x += zwierz.genom.dl[4]
+        zwierz.pozycja.y += zwierz.genom.dl[4]
+    elif wybor == 'NW':
+        zwierz.pozycja.x += zwierz.genom.dl[5]
+        zwierz.pozycja.y += zwierz.genom.dl[5]
+    elif wybor == 'SE':
+        zwierz.pozycja.x += zwierz.genom.dl[6]
+        zwierz.pozycja.y += zwierz.genom.dl[6]
+    elif wybor == 'SW':
+        zwierz.pozycja.x += zwierz.genom.dl[7]
+        zwierz.pozycja.y += zwierz.genom.dl[7]
 
