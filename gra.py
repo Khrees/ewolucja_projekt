@@ -137,3 +137,12 @@ for krolik in listazwieraat:
             krolik.y += 0 % rozmiar
         else:
             krolik.y += 0
+
+#teraz smierc i nowe zycie
+
+for krolik in listazwieraat:
+    if krolik.energia <= 0:
+        del krolik
+        nowykrolik = zwierz
+        listazwieraat.append(nowykrolik)
+        # i atrybuty...
