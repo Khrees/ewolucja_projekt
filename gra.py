@@ -150,7 +150,7 @@ for krolik in listazwieraat:
 for krolik in listazwieraat:
     if krolik.energia <= 0:
 
-        # del krolik
+        # del krolik # http://stackoverflow.com/questions/2150108/efficient-way-to-shift-a-list-in-python
         # nowykrolik = zwierz
         # listazwieraat.append(nowykrolik)
         # # i atrybuty...
