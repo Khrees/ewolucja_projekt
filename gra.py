@@ -138,7 +138,7 @@ for krolik in listazwieraat:
         else:
             krolik.y += 0
 
-#teraz smierc i nowe zycie
+    # teraz smierc i nowe zycie
 
 for krolik in listazwieraat:
     if krolik.energia <= 0:
@@ -154,7 +154,7 @@ for krolik in listazwieraat:
         krolik.idz = noweidz
         krolik.energia = 100
         krolik.czas_zycia = 0
-        krolik.x = r.randint(0,rozmiar)
-        krolik.y = r.randint(0,rozmiar)
+        krolik.x = r.randint(0, rozmiar)
+        krolik.y = r.randint(0, rozmiar)
         for g in xrange(len(krolik.genom)):
-            krolik.genom[g]=r.randint(-10,10)
+            krolik.genom[g] = r.randint(-10, 10)
