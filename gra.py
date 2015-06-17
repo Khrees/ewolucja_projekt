@@ -27,7 +27,7 @@ zwierz = zwierza.Zwierz()
 
 # tu jeszcze while ogolny
 while len(listazwieraat) < 100:  # generuje
-    listazwieraat.append(zwierz)
+    listazwieraat.append(copy.deepcopy(zwierz))
 
 for zwierze in listazwieraat:  # modyfikuje
 
@@ -57,8 +57,8 @@ for x in range(rozmiar):
 for krolik in listazwieraat:
     # to jest tak glupie ze nie moge. jak to zrobic inaczej?
 
-    wrrr = r.randint(0, 8)
-    if wrrr == 1:
+    wrrr = r.randint(0, 7)
+    if wrrr == 0:
         if 0 > krolik.x - krolik.genom[wrrr] > rozmiar:
             krolik.x -= krolik.genom[wrrr] % rozmiar
         else:
@@ -68,11 +68,21 @@ for krolik in listazwieraat:
         else:
             krolik.y += krolik.genom[wrrr]
 
-    if wrrr == 2:
+    if wrrr == 1:
         if 0 > krolik.x - 0 > rozmiar:
             krolik.x -= 0 % rozmiar
         else:
             krolik.x -= 0
+        if 0 > krolik.y + krolik.genom[wrrr] > rozmiar:
+            krolik.y += krolik.genom[wrrr] % rozmiar
+        else:
+            krolik.y += krolik.genom[wrrr]
+
+    if wrrr == 2:
+        if 0 > krolik.x + krolik.genom[wrrr] > rozmiar:
+            krolik.x += krolik.genom[wrrr] % rozmiar
+        else:
+            krolik.x += krolik.genom[wrrr]
         if 0 > krolik.y + krolik.genom[wrrr] > rozmiar:
             krolik.y += krolik.genom[wrrr] % rozmiar
         else:
@@ -83,22 +93,12 @@ for krolik in listazwieraat:
             krolik.x += krolik.genom[wrrr] % rozmiar
         else:
             krolik.x += krolik.genom[wrrr]
-        if 0 > krolik.y + krolik.genom[wrrr] > rozmiar:
-            krolik.y += krolik.genom[wrrr] % rozmiar
-        else:
-            krolik.y += krolik.genom[wrrr]
-
-    if wrrr == 4:
-        if 0 > krolik.x + krolik.genom[wrrr] > rozmiar:
-            krolik.x += krolik.genom[wrrr] % rozmiar
-        else:
-            krolik.x += krolik.genom[wrrr]
         if 0 > krolik.y + 0 > rozmiar:
             krolik.y += 0 % rozmiar
         else:
             krolik.y += 0
 
-    if wrrr == 5:
+    if wrrr == 4:
         if 0 > krolik.x + krolik.genom[wrrr] > rozmiar:
             krolik.x += krolik.genom[wrrr] % rozmiar
         else:
@@ -108,7 +108,7 @@ for krolik in listazwieraat:
         else:
             krolik.y -= krolik.genom[wrrr]
 
-    if wrrr == 6:
+    if wrrr == 5:
         if 0 > krolik.x - 0 > rozmiar:
             krolik.x -= 0 % rozmiar
         else:
@@ -118,7 +118,7 @@ for krolik in listazwieraat:
         else:
             krolik.y -= krolik.genom[wrrr]
 
-    if wrrr == 7:
+    if wrrr == 6:
         if 0 > krolik.x - krolik.genom[wrrr] > rozmiar:
             krolik.x -= krolik.genom[wrrr] % rozmiar
         else:
@@ -128,7 +128,7 @@ for krolik in listazwieraat:
         else:
             krolik.y -= krolik.genom[wrrr]
 
-    if wrrr == 8:
+    if wrrr == 7:
         if 0 > krolik.x - krolik.genom[wrrr] > rozmiar:
             krolik.x -= krolik.genom[wrrr] % rozmiar
         else:
@@ -142,7 +142,19 @@ for krolik in listazwieraat:
 
 for krolik in listazwieraat:
     if krolik.energia <= 0:
-        del krolik
-        nowykrolik = zwierz
-        listazwieraat.append(nowykrolik)
-        # i atrybuty...
+
+        # del krolik
+        # nowykrolik = zwierz
+        # listazwieraat.append(nowykrolik)
+        # # i atrybuty...
+
+        # moze zamiast del po prostu resetowac krolika
+        noweidz = r.random()
+
+        krolik.idz = noweidz
+        krolik.energia = 100
+        krolik.czas_zycia = 0
+        krolik.x = r.randint(0,rozmiar)
+        krolik.y = r.randint(0,rozmiar)
+        for g in xrange(len(krolik.genom)):
+            krolik.genom[g]=r.randint(-10,10)
