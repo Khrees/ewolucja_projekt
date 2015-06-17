@@ -140,6 +140,13 @@ for krolik in listazwieraat:
 
     # teraz smierc i nowe zycie
 
+    # jedzenie!!!
+for krolik in listazwieraat:
+    for x in xrange(0,rozmiar):
+        for y in xrange(0,rozmiar):
+            if krolik.x == x and krolik.y == y:
+                krolik.jedz(ziemia[x][y])
+
 for krolik in listazwieraat:
     if krolik.energia <= 0:
 
