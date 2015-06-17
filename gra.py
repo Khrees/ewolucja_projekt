@@ -142,8 +142,8 @@ for krolik in listazwieraat:
 
     # jedzenie!!!
 for krolik in listazwieraat:
-    for x in xrange(0,rozmiar):
-        for y in xrange(0,rozmiar):
+    for x in xrange(0, rozmiar):
+        for y in xrange(0, rozmiar):
             if krolik.x == x and krolik.y == y:
                 krolik.jedz(ziemia[x][y])
 
@@ -165,3 +165,14 @@ for krolik in listazwieraat:
         krolik.y = r.randint(0, rozmiar)
         for g in xrange(len(krolik.genom)):
             krolik.genom[g] = r.randint(-10, 10)
+
+    # rozmnazanie
+for krolik in listazwieraat:
+    dojrzalosc = 100
+    libido = 50
+    if krolik.czas_zycia >= dojrzalosc and krolik.energia >= libido:
+        listazwieraat.append(copy.deepcopy(krolik))  # nie ma znaczenia czy nowy sie zmieni czy stary, nie?
+        krolik.czas_zycia = 0
+        krolik.energia = 100
+        krolik.genom[r.randint(0, 7)] += r.randint(-2, 2)
+
