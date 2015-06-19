@@ -58,90 +58,49 @@ while dzien < 1000:
 
     # ruch zwierzat
     for krolik in listazwieraat:
-        # to jest tak glupie ze nie moge. jak to zrobic inaczej?
         krolik.energia -= 1
-        wrrr = r.randint(0, 7)
-        if wrrr == 0:
-            if 0 > krolik.x - krolik.genom[wrrr] > rozmiar:
-                krolik.x -= krolik.genom[wrrr] % rozmiar
-            else:
-                krolik.x -= krolik.genom[wrrr]
-            if 0 > krolik.y + krolik.genom[wrrr] > rozmiar:
-                krolik.y += krolik.genom[wrrr] % rozmiar
-            else:
-                krolik.y += krolik.genom[wrrr]
+        kierunek = r.randint(0,7)
+        
+        # ruszanie sie
+        if kierunek == 0:
+        	krolik.x += krolik.genom[kierunek]
 
-        if wrrr == 1:
-            if 0 > krolik.x - 0 > rozmiar:
-                krolik.x -= 0 % rozmiar
-            else:
-                krolik.x -= 0
-            if 0 > krolik.y + krolik.genom[wrrr] > rozmiar:
-                krolik.y += krolik.genom[wrrr] % rozmiar
-            else:
-                krolik.y += krolik.genom[wrrr]
+        if kierunek == 1:
+        	krolik.x += krolik.genom[kierunek]
+        	krolik.y -= krolik.genom[kierunek]
 
-        if wrrr == 2:
-            if 0 > krolik.x + krolik.genom[wrrr] > rozmiar:
-                krolik.x += krolik.genom[wrrr] % rozmiar
-            else:
-                krolik.x += krolik.genom[wrrr]
-            if 0 > krolik.y + krolik.genom[wrrr] > rozmiar:
-                krolik.y += krolik.genom[wrrr] % rozmiar
-            else:
-                krolik.y += krolik.genom[wrrr]
+        if kierunek == 2:
+        	krolik.y -= krolik.genom[kierunek]
 
-        if wrrr == 3:
-            if 0 > krolik.x + krolik.genom[wrrr] > rozmiar:
-                krolik.x += krolik.genom[wrrr] % rozmiar
-            else:
-                krolik.x += krolik.genom[wrrr]
-            if 0 > krolik.y + 0 > rozmiar:
-                krolik.y += 0 % rozmiar
-            else:
-                krolik.y += 0
+        if kierunek == 3:
+        	krolik.x -= krolik.genom[kierunek]
+        	krolik.y -= krolik.genom[kierunek]
 
-        if wrrr == 4:
-            if 0 > krolik.x + krolik.genom[wrrr] > rozmiar:
-                krolik.x += krolik.genom[wrrr] % rozmiar
-            else:
-                krolik.x += krolik.genom[wrrr]
-            if 0 > krolik.y - krolik.genom[wrrr] > rozmiar:
-                krolik.y -= krolik.genom[wrrr] % rozmiar
-            else:
-                krolik.y -= krolik.genom[wrrr]
+        if kierunek == 4:
+        	krolik.x -= krolik.genom[kierunek]
 
-        if wrrr == 5:
-            if 0 > krolik.x - 0 > rozmiar:
-                krolik.x -= 0 % rozmiar
-            else:
-                krolik.x -= 0
-            if 0 > krolik.y - krolik.genom[wrrr] > rozmiar:
-                krolik.y -= krolik.genom[wrrr] % rozmiar
-            else:
-                krolik.y -= krolik.genom[wrrr]
+        if kierunek == 5:
+        	krolik.x -= krolik.genom[kierunek]
+        	krolik.y += krolik.genom[kierunek]
 
-        if wrrr == 6:
-            if 0 > krolik.x - krolik.genom[wrrr] > rozmiar:
-                krolik.x -= krolik.genom[wrrr] % rozmiar
-            else:
-                krolik.x -= krolik.genom[wrrr]
-            if 0 > krolik.y - krolik.genom[wrrr] > rozmiar:
-                krolik.y -= krolik.genom[wrrr] % rozmiar
-            else:
-                krolik.y -= krolik.genom[wrrr]
+        if kierunek == 6:
+        	krolik.y += krolik.genom[kierunek]
 
-        if wrrr == 7:
-            if 0 > krolik.x - krolik.genom[wrrr] > rozmiar:
-                krolik.x -= krolik.genom[wrrr] % rozmiar
-            else:
-                krolik.x -= krolik.genom[wrrr]
-            if 0 > krolik.y + 0 > rozmiar:
-                krolik.y += 0 % rozmiar
-            else:
-                krolik.y += 0
+        if kierunek == 7:
+        	krolik.x += krolik.genom[kierunek]
+        	krolik.y += krolik.genom[kierunek]
 
-        # teraz smierc i nowe zycie
+        #sprawdzanie, czy nie wyszedl i ewentualne przemieszczenie
+        if 0 > krolik.x:
+        	krolik.x += rozmiar
+        elif krolik.x > rozmiar:
+        	krolik.x -= rozmiar
+
+        if 0 > krolik.y:
+        	krolik.y += rozmiar
+        elif krolik.y > rozmiar:
+        	krolik.y -= rozmiar
+
 
         # jedzenie!!!
     for krolik in listazwieraat:
