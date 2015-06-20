@@ -73,10 +73,11 @@ class Zwierz(object):
                 if self.x == x and self.y == y:
                     self.jedz(ziemia[x][y])
 
-    def zycie_jest_nowela(self):
-        self.rusz_sie()
-        self.energia -= 1
-        # self.rozmnazaj_sie()
+    def zycie_jest_nowela(self,rozmiar, listazwieraat, ziemia):
+        self.czy_ma_co_jesc(rozmiar, ziemia)
+        self.czy_umrze(listazwieraat)
+        if len(listazwieraat) <= 500:
+            self.rozmnazaj_sie(listazwieraat)
         self.czas_zycia += 1
 
     def jedz(self, drzewo):

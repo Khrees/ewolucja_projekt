@@ -69,13 +69,8 @@ def wyswietlanie():
         glVertex2f(krolik.x * w - 1, krolik.y * h + h - 1)
         glEnd()
 
-        # jedzenie!!!
     for krolik in listazwieraat:
-        krolik.czy_ma_co_jesc(rozmiar, ziemia)
-        krolik.czy_umrze(listazwieraat)
-        if len(listazwieraat) <= 500:
-            krolik.rozmnazaj_sie(listazwieraat)
-        krolik.czas_zycia += 1
+        krolik.zycie_jest_nowela(rozmiar, listazwieraat, ziemia)
 
     print(len(listazwieraat))
     dzien += 1
