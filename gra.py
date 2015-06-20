@@ -93,7 +93,7 @@ def DisplayFunc():
     for x in range(rozmiar):
         for y in range(rozmiar):
 
-            los = r.randint(0, 100)
+            los = r.randint(0, 1000)/10.
 
             if ziemia[x][y].szansa_na_wzrost > los:
                 ziemia[x][y].rosnie_drzewo()
@@ -204,10 +204,13 @@ def DisplayFunc():
     #         print(dzien, len(listazwieraat))
     #         print(k.idz, k.x, k.y, k.energia,k.genom)
 
-    # print(dzien)
+    print(len(listazwieraat))
     dzien += 1
 
     glFlush()
+
+    if len(listazwieraat) == 0:
+        sys.exit()
 
 # OpenGL
 glutInit()
