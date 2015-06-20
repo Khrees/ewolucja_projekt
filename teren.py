@@ -49,7 +49,7 @@ def tworzenie_lasow(rozmiar, ziemia):
     for x in range(rozmiar):
         for y in range(rozmiar):
 
-            los = r.randrange(0, 100)
+            los = r.uniform(0, 100)
 
             if ziemia[x][y].szansa_na_wzrost > los:
                 ziemia[x][y].rosnie_drzewo()
