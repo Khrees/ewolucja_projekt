@@ -4,7 +4,7 @@ import random as r
 
 
 class Zwierz(object):
-    def __init__(self, pozycja=0, x=0, y=0, idz=0, energia=100, czas_zycia=0):
+    def __init__(self, pozycja=0, x=0, y=0, energia=100, czas_zycia=0):
         self.energia = energia
         self.czas_zycia = czas_zycia
         self.pozycja = pozycja
@@ -25,7 +25,6 @@ class Zwierz(object):
         self.energia -= 5
         kierunek = r.randint(0, 7)
 
-        # ruszanie sie
         if kierunek == 0:
             self.x += self.genom[kierunek]
 
@@ -54,6 +53,7 @@ class Zwierz(object):
             self.x += self.genom[kierunek]
             self.y += self.genom[kierunek]
 
+        # tu moglem zepsuc, mam nadzieje ze nie
         if 0 > self.x:
             self.x += rozmiar
         elif self.x > rozmiar:
@@ -68,14 +68,15 @@ class Zwierz(object):
         if self.energia <= 0:
             lista.remove(self)
 
-    def czy_ma_co_jesc(self, rozmiar, ziemia):
+    def czy_ma_co_jesc(self, ziemia):
+        rozmiar = len(ziemia)
         for x in xrange(0, rozmiar):
             for y in xrange(0, rozmiar):
                 if self.x == x and self.y == y:
                     self.jedz(ziemia[x][y])
 
-    def zycie_jest_nowela(self, rozmiar, lista_zwierzat, ziemia):
-        self.czy_ma_co_jesc(rozmiar, ziemia)
+    def zycie_jest_nowela(self, lista_zwierzat, ziemia):
+        self.czy_ma_co_jesc(ziemia)
         self.czy_umrze(lista_zwierzat)
         self.rozmnazaj_sie(lista_zwierzat)
         self.czas_zycia += 1

@@ -18,7 +18,7 @@ class Pustynia(Teren):
     def __init__(self, pozycja=0):
         Teren.__init__(self, pozycja=0)
         self.pozycja = pozycja
-        self.szansa_na_wzrost = .5
+        self.szansa_na_wzrost = 0.5
 
 
 class Dzunkla(Teren):
@@ -45,7 +45,8 @@ def generuj_teren(rozmiar):
     return ziemia
 
 
-def tworzenie_lasow(rozmiar, ziemia):
+def tworzenie_lasow(ziemia):
+    rozmiar = len(ziemia)
     for x in range(rozmiar):
         for y in range(rozmiar):
 

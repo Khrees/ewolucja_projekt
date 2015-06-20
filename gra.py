@@ -57,7 +57,7 @@ def wyswietlanie():
     w = 2. / rozmiar
 
     rysuj_teren(w, h)
-    teren.tworzenie_lasow(rozmiar, ziemia)
+    teren.tworzenie_lasow(ziemia)
 
     for krolik in lista_zwierzat:
         krolik.rusz_sie(rozmiar)
@@ -71,7 +71,7 @@ def wyswietlanie():
         glEnd()
 
     for krolik in lista_zwierzat:
-        krolik.zycie_jest_nowela(rozmiar, lista_zwierzat, ziemia)
+        krolik.zycie_jest_nowela(lista_zwierzat, ziemia)
 
     print(len(lista_zwierzat))
     dzien += 1
