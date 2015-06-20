@@ -2,6 +2,7 @@ __author__ = 'illmoded'
 import copy
 import random as r
 
+
 class Teren(object):
     def __init__(self, pozycja=0, energia=0):
         self.pozycja = pozycja
@@ -25,14 +26,13 @@ class Dzunkla(Teren):
         Teren.__init__(self, pozycja=0)
         self.pozycja = pozycja
         self.szansa_na_wzrost = 5
-        self.kto = "D"
 
 p = Pustynia()
 d = Dzunkla()
 
+
 def generuj_teren(rozmiar):
     ziemia = [[0 for x in range(rozmiar)] for y in range(rozmiar)]
-
     for x in range(rozmiar):
         for y in range(rozmiar):
             if 60 > x > 40 and 60 > y > 40:
@@ -44,8 +44,8 @@ def generuj_teren(rozmiar):
                 # print(ziemia[x][y].pozycja)
     return ziemia
 
+
 def tworzenie_lasow(rozmiar, ziemia):
-    los = 0
     for x in range(rozmiar):
         for y in range(rozmiar):
 

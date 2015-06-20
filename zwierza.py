@@ -2,6 +2,7 @@ __author__ = 'illmoded'
 import copy
 import random as r
 
+
 class Zwierz(object):
     def __init__(self, pozycja=0, x=0, y=0, idz=0, energia=100, czas_zycia=0):
         self.idz = idz
@@ -73,7 +74,7 @@ class Zwierz(object):
                 if self.x == x and self.y == y:
                     self.jedz(ziemia[x][y])
 
-    def zycie_jest_nowela(self,rozmiar, listazwieraat, ziemia):
+    def zycie_jest_nowela(self, rozmiar, listazwieraat, ziemia):
         self.czy_ma_co_jesc(rozmiar, ziemia)
         self.czy_umrze(listazwieraat)
         if len(listazwieraat) <= 500:
@@ -83,6 +84,7 @@ class Zwierz(object):
     def jedz(self, drzewo):
         self.energia += drzewo.energia
         drzewo.energia = 0
+
 
 def generuj_zwierzeta(ilosc, rozmiar):
     listazwieraat = []

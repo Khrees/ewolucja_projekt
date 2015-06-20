@@ -13,6 +13,7 @@ poczatkowa_liczba_zwierzat = 10
 ziemia = teren.generuj_teren(rozmiar)
 listazwieraat = zwierza.generuj_zwierzeta(poczatkowa_liczba_zwierzat, rozmiar)
 
+
 # rysowanie terenu
 def rysuj_teren(w, h):
     for x in range(rozmiar):
