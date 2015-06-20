@@ -4,8 +4,8 @@ import zwierza
 import teren
 import copy
 import random as r
-from OpenGL.GL   import *
-from OpenGL.GLU  import *
+from OpenGL.GL import *
+from OpenGL.GLU import *
 from OpenGL.GLUT import *
 
 p = teren.Pustynia()
@@ -29,7 +29,6 @@ for x in range(rozmiar):
 listazwieraat = []
 zwierz = zwierza.Zwierz()
 
-
 while len(listazwieraat) < 10:  # generuje
     listazwieraat.append(copy.deepcopy(zwierz))
 
@@ -38,7 +37,7 @@ for zwierze in listazwieraat:  # modyfikuje
     zwierze.x = r.randint(0, rozmiar)
     zwierze.y = r.randint(0, rozmiar)
 
-    zwierze.idz = r.randint(0,1000)
+    zwierze.idz = r.randint(0, 1000)
 
     for i in xrange(8):
         zwierze.genom.append(r.randint(0, 10))
@@ -49,43 +48,43 @@ for zwierze in listazwieraat:  # modyfikuje
 def RysujTeren(w, h):
     for x in range(rozmiar):
         for y in range(rozmiar):
-            if ziemia[x][y].kto == "P":
+            if type(ziemia[x][y]) is teren.Pustynia:
                 glColor3f(1, 1, 0)
                 glBegin(GL_POLYGON)
-                glVertex2f(x*w-1, y*h-1)
-                glVertex2f(x*w+w-1, y*h-1)
-                glVertex2f(x*w+w-1, y*h+h-1)
-                glVertex2f(x*w-1, y*h+h-1)
-                glVertex2f(x*w-1, y*h-1)
+                glVertex2f(x * w - 1, y * h - 1)
+                glVertex2f(x * w + w - 1, y * h - 1)
+                glVertex2f(x * w + w - 1, y * h + h - 1)
+                glVertex2f(x * w - 1, y * h + h - 1)
+                glVertex2f(x * w - 1, y * h - 1)
                 glEnd()
-            elif ziemia[x][y].kto == "D":
+            elif type(ziemia[x][y]) is teren.Dzunkla:
                 glColor3f(0, 1, 0)
                 glBegin(GL_POLYGON)
-                glVertex2f(x*w-1, y*h-1)
-                glVertex2f(x*w+w-1, y*h-1)
-                glVertex2f(x*w+w-1, y*h+h-1)
-                glVertex2f(x*w-1, y*h+h-1)
+                glVertex2f(x * w - 1, y * h - 1)
+                glVertex2f(x * w + w - 1, y * h - 1)
+                glVertex2f(x * w + w - 1, y * h + h - 1)
+                glVertex2f(x * w - 1, y * h + h - 1)
                 glEnd()
-            if(ziemia[x][y].energia>0):
+            if (ziemia[x][y].energia > 0):
                 glColor3f(0, 0, 0)
                 glBegin(GL_LINES)
-                glVertex2f(x*w-1, y*h-1)
-                glVertex2f(x*w+w-1, y*h+h-1)
+                glVertex2f(x * w - 1, y * h - 1)
+                glVertex2f(x * w + w - 1, y * h + h - 1)
                 glEnd()
                 glBegin(GL_LINES)
-                glVertex2f(x*w+w-1, y*h-1)
-                glVertex2f(x*w-1, y*h+h-1)
+                glVertex2f(x * w + w - 1, y * h - 1)
+                glVertex2f(x * w - 1, y * h + h - 1)
                 glEnd()
     pass
 
-def DisplayFunc():
 
+def DisplayFunc():
     global dzien
     glutPostRedisplay()
     glClear(GL_COLOR_BUFFER_BIT)
 
-    h = 2./rozmiar
-    w = 2./rozmiar
+    h = 2. / rozmiar
+    w = 2. / rozmiar
     RysujTeren(w, h)
 
     # tak wyglada wzrost drzew
@@ -93,19 +92,19 @@ def DisplayFunc():
     for x in range(rozmiar):
         for y in range(rozmiar):
 
-            los = r.randint(0, 1000)/10.
+            los = r.randint(0, 1000) / 10.
 
             if ziemia[x][y].szansa_na_wzrost > los:
                 ziemia[x][y].rosnie_drzewo()
 
                 # print(los, ziemia[x][y].szansa_na_wzrost,ziemia[x][y].szansa_na_wzrost>los,ziemia[x][y].energia)
 
-# ruch zwierzat
+            # ruch zwierzat
     for krolik in listazwieraat:
         krolik.energia -= 5
-        kierunek = r.randint(0,7)
+        kierunek = r.randint(0, 7)
 
-# ruszanie sie
+        # ruszanie sie
         if kierunek == 0:
             krolik.x += krolik.genom[kierunek]
 
@@ -134,15 +133,15 @@ def DisplayFunc():
             krolik.x += krolik.genom[kierunek]
             krolik.y += krolik.genom[kierunek]
 
-        glColor3f((krolik.energia % 100.)/100., 0, 0)
+        glColor3f((krolik.energia % 100.) / 100., 0, 0)
         glBegin(GL_POLYGON)
-        glVertex2f(krolik.x*w-1, krolik.y*h-1)
-        glVertex2f(krolik.x*w+w-1, krolik.y*h-1)
-        glVertex2f(krolik.x*w+w-1, krolik.y*h+h-1)
-        glVertex2f(krolik.x*w-1, krolik.y*h+h-1)
+        glVertex2f(krolik.x * w - 1, krolik.y * h - 1)
+        glVertex2f(krolik.x * w + w - 1, krolik.y * h - 1)
+        glVertex2f(krolik.x * w + w - 1, krolik.y * h + h - 1)
+        glVertex2f(krolik.x * w - 1, krolik.y * h + h - 1)
         glEnd()
 
-# sprawdzanie, czy nie wyszedl i ewentualne przemieszczenie
+        # sprawdzanie, czy nie wyszedl i ewentualne przemieszczenie
         if 0 > krolik.x:
             krolik.x += rozmiar
         elif krolik.x > rozmiar:
@@ -154,7 +153,7 @@ def DisplayFunc():
             krolik.y -= rozmiar
 
 
-# jedzenie!!!
+        # jedzenie!!!
     for krolik in listazwieraat:
         for x in xrange(0, rozmiar):
             for y in xrange(0, rozmiar):
@@ -163,7 +162,6 @@ def DisplayFunc():
 
     for krolik in listazwieraat:
         if krolik.energia <= 0:
-
             # wydaje mi sie, ze dziala
             listazwieraat.remove(krolik)
 
@@ -183,7 +181,7 @@ def DisplayFunc():
             # for g in xrange(len(krolik.genom)):
             #     krolik.genom[g] = r.randint(-10, 10)
 
-        # rozmnazanie
+            # rozmnazanie
     if len(listazwieraat) <= 500:
         for krolik in listazwieraat:
             dojrzalosc = 20
@@ -214,10 +212,10 @@ def DisplayFunc():
 
 # OpenGL
 glutInit()
-glutInitWindowSize(600,600)
-glutInitWindowPosition (0, 0)
+glutInitWindowSize(600, 600)
+glutInitWindowPosition(0, 0)
 glutCreateWindow("Window")
 glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB)
 glutDisplayFunc(DisplayFunc)
-glClearColor(1.0,1.0,1.0,0.0)
+glClearColor(1.0, 1.0, 1.0, 0.0)
 glutMainLoop()
