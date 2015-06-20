@@ -8,7 +8,7 @@ import teren
 
 dzien = 0
 rozmiar = 100
-poczatkowa_liczba_zwierzat = 10
+poczatkowa_liczba_zwierzat = 50
 
 ziemia = teren.generuj_teren(rozmiar)
 listazwieraat = zwierza.generuj_zwierzeta(poczatkowa_liczba_zwierzat, rozmiar)

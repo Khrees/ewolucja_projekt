@@ -77,8 +77,7 @@ class Zwierz(object):
     def zycie_jest_nowela(self, rozmiar, listazwieraat, ziemia):
         self.czy_ma_co_jesc(rozmiar, ziemia)
         self.czy_umrze(listazwieraat)
-        if len(listazwieraat) <= 500:
-            self.rozmnazaj_sie(listazwieraat)
+        self.rozmnazaj_sie(listazwieraat)
         self.czas_zycia += 1
 
     def jedz(self, drzewo):
