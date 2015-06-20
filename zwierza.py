@@ -5,13 +5,13 @@ import random as r
 
 class Zwierz(object):
     def __init__(self, pozycja=0, x=0, y=0, idz=0, energia=100, czas_zycia=0):
-        self.idz = idz
         self.energia = energia
         self.czas_zycia = czas_zycia
         self.pozycja = pozycja
         self.x = x
         self.y = y
         self.genom = []
+        self.szybkosc = sum(self.genom)
 
     def rozmnazaj_sie(self, listazwieraat, dojrzalosc=50, libido=50):
         if self.czas_zycia >= dojrzalosc and self.energia >= libido:
@@ -96,8 +96,6 @@ def generuj_zwierzeta(ilosc, rozmiar):
 
         zwierze.x = r.randint(0, rozmiar)
         zwierze.y = r.randint(0, rozmiar)
-
-        zwierze.idz = r.randint(0, 1000)
 
         for i in xrange(8):
             zwierze.genom.append(r.randint(0, 10))
