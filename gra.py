@@ -46,41 +46,45 @@ for zwierze in listazwieraat:  # modyfikuje
 # albo stworzyc konstruktor i gnerowac w taki sposob, w sumie bardziej pythonowe by bylo
 
 # rysowanie terenu
-def RysujTeren():
-    h = 0.02
-    w = 0.02
-    glBegin(GL_POLYGON)
+def RysujTeren(w, h):
     for x in range(rozmiar):
         for y in range(rozmiar):
             if ziemia[x][y].kto == "P":
                 glColor3f(1, 1, 0)
-                # glBegin(GL_POLYGON)
+                glBegin(GL_POLYGON)
                 glVertex2f(x*w-1, y*h-1)
                 glVertex2f(x*w+w-1, y*h-1)
                 glVertex2f(x*w+w-1, y*h+h-1)
                 glVertex2f(x*w-1, y*h+h-1)
                 glVertex2f(x*w-1, y*h-1)
-                # glEnd()
+                glEnd()
             elif ziemia[x][y].kto == "D":
                 glColor3f(0, 1, 0)
-                # glBegin(GL_POLYGON)
+                glBegin(GL_POLYGON)
                 glVertex2f(x*w-1, y*h-1)
                 glVertex2f(x*w+w-1, y*h-1)
                 glVertex2f(x*w+w-1, y*h+h-1)
                 glVertex2f(x*w-1, y*h+h-1)
-                # glEnd()
-            else:
-                print "nope"
-    glEnd()
+                glEnd()
+            if(ziemia[x][y].energia>0):
+                glColor3f(0, 0, 0)
+                glBegin(GL_POLYGON)
+                glVertex2f(x*w-1, y*h-1)
+                glVertex2f(x*w+w-1, y*h-1)
+                glVertex2f(x*w+w-1, y*h+h-1)
+                glVertex2f(x*w-1, y*h+h-1)
+                glEnd()
     pass
 
 def DisplayFunc():
 
     global dzien
-    # glutPostRedisplay()
+    glutPostRedisplay()
     glClear(GL_COLOR_BUFFER_BIT)
 
-    RysujTeren()
+    h = 0.02
+    w = 0.02
+    RysujTeren(w, h)
 
     # tak wyglada wzrost drzew
     los = 0
@@ -127,6 +131,14 @@ def DisplayFunc():
         if kierunek == 7:
             krolik.x += krolik.genom[kierunek]
             krolik.y += krolik.genom[kierunek]
+
+        glColor3f(1, 0, 0)
+        glBegin(GL_POLYGON)
+        glVertex2f(krolik.x*w-1, krolik.y*h-1)
+        glVertex2f(krolik.x*w+w-1, krolik.y*h-1)
+        glVertex2f(krolik.x*w+w-1, krolik.y*h+h-1)
+        glVertex2f(krolik.x*w-1, krolik.y*h+h-1)
+        glEnd()
 
 # sprawdzanie, czy nie wyszedl i ewentualne przemieszczenie
         if 0 > krolik.x:
