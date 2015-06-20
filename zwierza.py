@@ -87,16 +87,16 @@ class Zwierz(object):
 
 
 def generuj_zwierzeta(ilosc, rozmiar):
-    listazwieraat = []
+    lista_zwierzat = []
     zwierz = Zwierz()
-    while len(listazwieraat) < ilosc:  # generuje
-        listazwieraat.append(copy.deepcopy(zwierz))
+    while len(lista_zwierzat) < ilosc:  # generuje
+        lista_zwierzat.append(copy.deepcopy(zwierz))
 
-    for zwierze in listazwieraat:  # modyfikuje
+    for zwierze in lista_zwierzat:  # modyfikuje
 
         zwierze.x = r.randint(0, rozmiar)
         zwierze.y = r.randint(0, rozmiar)
 
         for i in xrange(8):
             zwierze.genom.append(r.randint(0, 10))
-    return listazwieraat
+    return lista_zwierzat
