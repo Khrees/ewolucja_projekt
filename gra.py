@@ -4,10 +4,14 @@ import zwierza
 import teren
 import copy
 import random as r
+from OpenGL.GL   import *
+from OpenGL.GLU  import *
+from OpenGL.GLUT import *
 
 p = teren.Pustynia()
 d = teren.Dzunkla()
 
+dzien = 0
 rozmiar = 100
 ziemia = [[0 for x in range(rozmiar)] for y in range(rozmiar)]
 
@@ -41,9 +45,43 @@ for zwierze in listazwieraat:  # modyfikuje
 
 # albo stworzyc konstruktor i gnerowac w taki sposob, w sumie bardziej pythonowe by bylo
 
-# tu 
-dzien = 0
-while dzien < 1000:
+# rysowanie terenu
+def RysujTeren():
+    h = 0.02
+    w = 0.02
+    glBegin(GL_POLYGON)
+    for x in range(rozmiar):
+        for y in range(rozmiar):
+            if ziemia[x][y].kto == "P":
+                glColor3f(1, 1, 0)
+                # glBegin(GL_POLYGON)
+                glVertex2f(x*w-1, y*h-1)
+                glVertex2f(x*w+w-1, y*h-1)
+                glVertex2f(x*w+w-1, y*h+h-1)
+                glVertex2f(x*w-1, y*h+h-1)
+                glVertex2f(x*w-1, y*h-1)
+                # glEnd()
+            elif ziemia[x][y].kto == "D":
+                glColor3f(0, 1, 0)
+                # glBegin(GL_POLYGON)
+                glVertex2f(x*w-1, y*h-1)
+                glVertex2f(x*w+w-1, y*h-1)
+                glVertex2f(x*w+w-1, y*h+h-1)
+                glVertex2f(x*w-1, y*h+h-1)
+                # glEnd()
+            else:
+                print "nope"
+    glEnd()
+    pass
+
+def DisplayFunc():
+
+    global dzien
+    # glutPostRedisplay()
+    glClear(GL_COLOR_BUFFER_BIT)
+
+    RysujTeren()
+
     # tak wyglada wzrost drzew
     los = 0
     for x in range(rozmiar):
@@ -56,53 +94,53 @@ while dzien < 1000:
 
                 # print(los, ziemia[x][y].szansa_na_wzrost,ziemia[x][y].szansa_na_wzrost>los,ziemia[x][y].energia)
 
-    # ruch zwierzat
+# ruch zwierzat
     for krolik in listazwieraat:
-        krolik.energia -= 1
+        krolik.energia -= 5
         kierunek = r.randint(0,7)
-        
-        # ruszanie sie
+
+# ruszanie sie
         if kierunek == 0:
-        	krolik.x += krolik.genom[kierunek]
+            krolik.x += krolik.genom[kierunek]
 
         if kierunek == 1:
-        	krolik.x += krolik.genom[kierunek]
-        	krolik.y -= krolik.genom[kierunek]
+            krolik.x += krolik.genom[kierunek]
+            krolik.y -= krolik.genom[kierunek]
 
         if kierunek == 2:
-        	krolik.y -= krolik.genom[kierunek]
+            krolik.y -= krolik.genom[kierunek]
 
         if kierunek == 3:
-        	krolik.x -= krolik.genom[kierunek]
-        	krolik.y -= krolik.genom[kierunek]
+            krolik.x -= krolik.genom[kierunek]
+            krolik.y -= krolik.genom[kierunek]
 
         if kierunek == 4:
-        	krolik.x -= krolik.genom[kierunek]
+            krolik.x -= krolik.genom[kierunek]
 
         if kierunek == 5:
-        	krolik.x -= krolik.genom[kierunek]
-        	krolik.y += krolik.genom[kierunek]
+            krolik.x -= krolik.genom[kierunek]
+            krolik.y += krolik.genom[kierunek]
 
         if kierunek == 6:
-        	krolik.y += krolik.genom[kierunek]
+            krolik.y += krolik.genom[kierunek]
 
         if kierunek == 7:
-        	krolik.x += krolik.genom[kierunek]
-        	krolik.y += krolik.genom[kierunek]
+            krolik.x += krolik.genom[kierunek]
+            krolik.y += krolik.genom[kierunek]
 
-        #sprawdzanie, czy nie wyszedl i ewentualne przemieszczenie
+# sprawdzanie, czy nie wyszedl i ewentualne przemieszczenie
         if 0 > krolik.x:
-        	krolik.x += rozmiar
+            krolik.x += rozmiar
         elif krolik.x > rozmiar:
-        	krolik.x -= rozmiar
+            krolik.x -= rozmiar
 
         if 0 > krolik.y:
-        	krolik.y += rozmiar
+            krolik.y += rozmiar
         elif krolik.y > rozmiar:
-        	krolik.y -= rozmiar
+            krolik.y -= rozmiar
 
 
-        # jedzenie!!!
+# jedzenie!!!
     for krolik in listazwieraat:
         for x in xrange(0, rozmiar):
             for y in xrange(0, rozmiar):
@@ -144,12 +182,22 @@ while dzien < 1000:
     for krolik in listazwieraat:
         krolik.czas_zycia += 1
 
-    if dzien % 10 == 0:
-        for k in listazwieraat:
-            print(dzien, len(listazwieraat))
-            print(k.idz, k.x, k.y, k.energia,k.genom)
-            print(k.czas_zycia)
+    # if dzien % 10 == 0:
+    #     for k in listazwieraat:
+    #         print(dzien, len(listazwieraat))
+    #         print(k.idz, k.x, k.y, k.energia,k.genom)
 
+    # print(dzien)
     dzien += 1
-    
 
+    glFlush()
+
+# OpenGL
+glutInit()
+glutInitWindowSize(600,600)
+glutInitWindowPosition (0, 0)
+glutCreateWindow("Window")
+glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB)
+glutDisplayFunc(DisplayFunc)
+glClearColor(1.0,1.0,1.0,0.0)
+glutMainLoop()
