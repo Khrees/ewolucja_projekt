@@ -54,8 +54,8 @@ def wyswietlanie():
 
     h = 2. / rozmiar
     w = 2. / rozmiar
-    rysuj_teren(w, h)
 
+    rysuj_teren(w, h)
     teren.tworzenie_lasow(rozmiar, ziemia)
 
     for krolik in listazwieraat:
@@ -72,17 +72,9 @@ def wyswietlanie():
         # jedzenie!!!
     for krolik in listazwieraat:
         krolik.czy_ma_co_jesc(rozmiar, ziemia)
-
-    for krolik in listazwieraat:
         krolik.czy_umrze(listazwieraat)
-
-    if len(listazwieraat) <= 500:
-        for krolik in listazwieraat:
-            dojrzalosc = 20
-            libido = 50
-            krolik.rozmnazaj_sie(listazwieraat, dojrzalosc, libido)
-
-    for krolik in listazwieraat:
+        if len(listazwieraat) <= 500:
+            krolik.rozmnazaj_sie(listazwieraat)
         krolik.czas_zycia += 1
 
     print(len(listazwieraat))
