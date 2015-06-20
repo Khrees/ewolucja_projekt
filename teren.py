@@ -1,12 +1,12 @@
 __author__ = 'illmoded'
-
+import copy
+import random as r
 
 class Teren(object):
     def __init__(self, pozycja=0, energia=0):
         self.pozycja = pozycja
         self.energia = energia
         self.szansa_na_wzrost = 0
-        self.kto = "T"
 
     # @property
     def rosnie_drzewo(self):
@@ -18,7 +18,6 @@ class Pustynia(Teren):
         Teren.__init__(self, pozycja=0)
         self.pozycja = pozycja
         self.szansa_na_wzrost = .5
-        self.kto = "P"
 
 
 class Dzunkla(Teren):
@@ -27,3 +26,30 @@ class Dzunkla(Teren):
         self.pozycja = pozycja
         self.szansa_na_wzrost = 5
         self.kto = "D"
+
+p = Pustynia()
+d = Dzunkla()
+
+def generuj_teren(rozmiar):
+    ziemia = [[0 for x in range(rozmiar)] for y in range(rozmiar)]
+
+    for x in range(rozmiar):
+        for y in range(rozmiar):
+            if 60 > x > 40 and 60 > y > 40:
+                ziemia[x][y] = (copy.deepcopy(d))
+                ziemia[x][y].pozycja = x, y
+            else:
+                ziemia[x][y] = (copy.deepcopy(p))
+                ziemia[x][y].pozycja = x, y
+                # print(ziemia[x][y].pozycja)
+    return ziemia
+
+def tworzenie_lasow(rozmiar, ziemia):
+    los = 0
+    for x in range(rozmiar):
+        for y in range(rozmiar):
+
+            los = r.randrange(0, 100)
+
+            if ziemia[x][y].szansa_na_wzrost > los:
+                ziemia[x][y].rosnie_drzewo()
