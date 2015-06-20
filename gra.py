@@ -30,7 +30,7 @@ listazwieraat = []
 zwierz = zwierza.Zwierz()
 
 
-while len(listazwieraat) < 1:  # generuje
+while len(listazwieraat) < 10:  # generuje
     listazwieraat.append(copy.deepcopy(zwierz))
 
 for zwierze in listazwieraat:  # modyfikuje
@@ -68,10 +68,12 @@ def RysujTeren(w, h):
                 glEnd()
             if(ziemia[x][y].energia>0):
                 glColor3f(0, 0, 0)
-                glBegin(GL_POLYGON)
+                glBegin(GL_LINES)
                 glVertex2f(x*w-1, y*h-1)
-                glVertex2f(x*w+w-1, y*h-1)
                 glVertex2f(x*w+w-1, y*h+h-1)
+                glEnd()
+                glBegin(GL_LINES)
+                glVertex2f(x*w+w-1, y*h-1)
                 glVertex2f(x*w-1, y*h+h-1)
                 glEnd()
     pass
@@ -82,8 +84,8 @@ def DisplayFunc():
     glutPostRedisplay()
     glClear(GL_COLOR_BUFFER_BIT)
 
-    h = 0.02
-    w = 0.02
+    h = 2./rozmiar
+    w = 2./rozmiar
     RysujTeren(w, h)
 
     # tak wyglada wzrost drzew
@@ -132,7 +134,7 @@ def DisplayFunc():
             krolik.x += krolik.genom[kierunek]
             krolik.y += krolik.genom[kierunek]
 
-        glColor3f(1, 0, 0)
+        glColor3f((krolik.energia % 100.)/100., 0, 0)
         glBegin(GL_POLYGON)
         glVertex2f(krolik.x*w-1, krolik.y*h-1)
         glVertex2f(krolik.x*w+w-1, krolik.y*h-1)
@@ -162,21 +164,24 @@ def DisplayFunc():
     for krolik in listazwieraat:
         if krolik.energia <= 0:
 
+            # wydaje mi sie, ze dziala
+            listazwieraat.remove(krolik)
+
             # del krolik # http://stackoverflow.com/questions/2150108/efficient-way-to-shift-a-list-in-python
             # nowykrolik = zwierz
             # listazwieraat.append(nowykrolik)
             # # i atrybuty...
 
             # moze zamiast del po prostu resetowac krolika
-            noweidz = r.randint(0,1000)
+            # noweidz = r.randint(0,1000)
 
-            krolik.idz = noweidz
-            krolik.energia = 100
-            krolik.czas_zycia = 0
-            krolik.x = r.randint(0, rozmiar)
-            krolik.y = r.randint(0, rozmiar)
-            for g in xrange(len(krolik.genom)):
-                krolik.genom[g] = r.randint(-10, 10)
+            # krolik.idz = noweidz
+            # krolik.energia = 100
+            # krolik.czas_zycia = 0
+            # krolik.x = r.randint(0, rozmiar)
+            # krolik.y = r.randint(0, rozmiar)
+            # for g in xrange(len(krolik.genom)):
+            #     krolik.genom[g] = r.randint(-10, 10)
 
         # rozmnazanie
     if len(listazwieraat) <= 500:
