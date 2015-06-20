@@ -13,10 +13,10 @@ class Zwierz(object):
         self.genom = []
         self.szybkosc = sum(self.genom)
 
-    def rozmnazaj_sie(self, listazwieraat, dojrzalosc=50, libido=50):
+    def rozmnazaj_sie(self, lista_zwierzat, dojrzalosc=50, libido=50):
         if self.czas_zycia >= dojrzalosc and self.energia >= libido:
                 self.energia /= 2
-                listazwieraat.append(copy.deepcopy(self))
+                lista_zwierzat.append(copy.deepcopy(self))
                 self.czas_zycia = 0
                 self.energia = 100
                 self.genom[r.randint(0, 7)] += r.randint(-2, 2)
@@ -74,10 +74,10 @@ class Zwierz(object):
                 if self.x == x and self.y == y:
                     self.jedz(ziemia[x][y])
 
-    def zycie_jest_nowela(self, rozmiar, listazwieraat, ziemia):
+    def zycie_jest_nowela(self, rozmiar, lista_zwierzat, ziemia):
         self.czy_ma_co_jesc(rozmiar, ziemia)
-        self.czy_umrze(listazwieraat)
-        self.rozmnazaj_sie(listazwieraat)
+        self.czy_umrze(lista_zwierzat)
+        self.rozmnazaj_sie(lista_zwierzat)
         self.czas_zycia += 1
 
     def jedz(self, drzewo):

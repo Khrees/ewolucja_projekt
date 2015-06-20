@@ -11,7 +11,7 @@ rozmiar = 100
 poczatkowa_liczba_zwierzat = 50
 
 ziemia = teren.generuj_teren(rozmiar)
-listazwieraat = zwierza.generuj_zwierzeta(poczatkowa_liczba_zwierzat, rozmiar)
+lista_zwierzat = zwierza.generuj_zwierzeta(poczatkowa_liczba_zwierzat, rozmiar)
 
 
 # rysowanie terenu
@@ -59,7 +59,7 @@ def wyswietlanie():
     rysuj_teren(w, h)
     teren.tworzenie_lasow(rozmiar, ziemia)
 
-    for krolik in listazwieraat:
+    for krolik in lista_zwierzat:
         krolik.rusz_sie(rozmiar)
 
         glColor3f((krolik.energia % 100.) / 100., 0, 0)
@@ -70,15 +70,15 @@ def wyswietlanie():
         glVertex2f(krolik.x * w - 1, krolik.y * h + h - 1)
         glEnd()
 
-    for krolik in listazwieraat:
-        krolik.zycie_jest_nowela(rozmiar, listazwieraat, ziemia)
+    for krolik in lista_zwierzat:
+        krolik.zycie_jest_nowela(rozmiar, lista_zwierzat, ziemia)
 
-    print(len(listazwieraat))
+    print(len(lista_zwierzat))
     dzien += 1
 
     glFlush()
 
-    if len(listazwieraat) == 0:
+    if len(lista_zwierzat) == 0:
         sys.exit()
 
 # OpenGL
