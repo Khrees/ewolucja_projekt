@@ -44,11 +44,13 @@ def init():
     glShadeModel(GL_SMOOTH)
     glEnable(GL_COLOR_MATERIAL)
 
+# rysowanie szecianu
 def szecian(x, y, z, h):
     glTranslate(x * h - 1, y * h - 1, z)
     glutSolidCube(h)
     glTranslate(-(x * h - 1), -(y * h - 1), -z)
 
+# rysowanie sfery
 def sfera(x, y, z, h):
     glTranslate(x * h - 1, y * h - 1, z)
     glutSolidSphere(h/2., 10, 10)
@@ -59,15 +61,18 @@ def sfera(x, y, z, h):
     glTranslate(0, 0, -h/2.)
     glTranslate(-(x * h - 1), -(y * h - 1), -z)
 
+# rysowanie drzew (do zrobienia)
 def drzewko(x, y, z , h):
     glTranslate(x * h - 1, y * h - 1, z)
     glutSolidCylinder(h/4., h/4., 10, 10)
     glTranslate(-(x * h - 1), -(y * h - 1), -z)
 
+# funkcja klawiatury
 def klawiatura(*args):
     if args[0] == '\033' or args[0] == 'q':
         sys.exit()
 
+# funkcja przyciskow myszy (do zmiany)
 def mysz(button, state, x, y):
     global action, xStart, yStart
     if (button==GLUT_LEFT_BUTTON):
@@ -82,10 +87,11 @@ def mysz(button, state, x, y):
     xStart = x
     yStart = y
 
+# funkcja ruchu myszy (do zmiany)
 def ruch(x, y):
     global zoom, xStart, yStart, rot_x, rot_y, rot_z, xTrans, yTrans
     if (action=="MOVE_EYE"):
-        rot_x += y - yStart
+        rot_x -= y - yStart
         rot_y -= x - xStart
     elif (action=="MOVE_EYE_2"):
         rot_z += y - yStart
@@ -99,16 +105,17 @@ def ruch(x, y):
         elif zoom < 1.1:
             zoom = 1.1
     else:
-        print("unknown action\n", action)
+        print("u wot m8?\n", action)
     xStart = x
     yStart = y 
     glutPostRedisplay()
 
+# zmiana rozmiaru okna (jeszcze do zmiany)
 def reshape(w, h):
     glViewport(0, 0, w, h)
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
-    glOrtho(-1.2, 1.2, -1.2, 1.2, -1.2, 1.2)
+    # glOrtho(-1.2, 1.2, -1.2, 1.2, -1.2, 1.2)
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
 
@@ -126,6 +133,7 @@ def rysuj_teren(w, h):
                 glColor3f(0, 0.5, 0)
                 drzewko(x, y, h, h)
 
+# obrot
 def polar():
     glTranslatef( yTrans/100., 0.0, 0.0 )
     glTranslatef(  0.0, -xTrans/100., 0.0)
@@ -133,6 +141,7 @@ def polar():
     glRotatef( -rot_x, 1.0, 0.0, 0.0)
     glRotatef( -rot_y, .0, 1.0, 0.0)
 
+# ustawienia obrotow
 def wyswietlanie():
     global zoom, maxzoom, minzoom, rot_x, rot_y, rot_z
 
@@ -150,6 +159,7 @@ def wyswietlanie():
     polar()
     rysuj()
 
+# rysowanie
 def rysuj():
     global dzien
     h = 2. / rozmiar
@@ -163,7 +173,7 @@ def rysuj():
         krolik.rusz_sie(rozmiar)
 
         glColor3f((krolik.energia % 100.) / 100., 0, 0)
-        szecian(krolik.x, krolik.y, h, h)
+        sfera(krolik.x, krolik.y, h, h)
 
     for krolik in lista_zwierzat:
         krolik.zycie_jest_nowela(lista_zwierzat, ziemia)
