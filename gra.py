@@ -11,7 +11,7 @@ import teren
 f = open('plik.txt', 'w')
 dzien = 0
 rozmiar = 100
-poczatkowa_liczba_zwierzat = 20
+poczatkowa_liczba_zwierzat = 50
 
 rot_x = 0.
 rot_y = 0.
@@ -54,18 +54,19 @@ def szecian(x, y, z, h):
 def sfera(x, y, z, h):
     glTranslate(x * h - 1, y * h - 1, z)
     glutSolidSphere(h/2., 10, 10)
-    glTranslate(0, 0, h/4.)
-    glutSolidCone(h/3., h/4., 10, 10)
-    glTranslate(0, 0, h/4.)
-    glutSolidCone(h/3., h/4., 10, 10)
-    glTranslate(0, 0, -h/2.)
     glTranslate(-(x * h - 1), -(y * h - 1), -z)
 
 # rysowanie drzew (do zrobienia)
-def drzewko(x, y, z , h):
-    glTranslate(x * h - 1, y * h - 1, z)
+def drzewko(x, y, z , h, e):
+    N = e/10
+    glTranslate(x * h - 1, y * h - 1, z - h/2.)
     glutSolidCylinder(h/4., h/4., 10, 10)
-    glTranslate(-(x * h - 1), -(y * h - 1), -z)
+    for i in xrange(1,N):
+        glTranslate(0, 0, i*h/4.)
+        glutSolidCone(h/3., h/4., 10, 10)
+        glTranslate(0, 0, -i*h/4.)
+        pass
+    glTranslate(-(x * h - 1), -(y * h - 1), -(z - h/2.))
 
 # funkcja klawiatury
 def klawiatura(*args):
@@ -94,7 +95,7 @@ def ruch(x, y):
         rot_x -= y - yStart
         rot_y -= x - xStart
     elif (action=="MOVE_EYE_2"):
-        rot_z += y - yStart
+        rot_z += x - yStart
     elif (action=="TRANS"):
         xTrans += y - yStart
         yTrans += x - xStart
@@ -106,6 +107,20 @@ def ruch(x, y):
             zoom = 1.1
     else:
         print("u wot m8?\n", action)
+
+    # print rot_x, rot_y, rot_z
+    # if rot_x > 90:
+    #     rot_x = 90
+    # elif rot_x < 0:
+    #     rot_x = 0
+    # if rot_y > 90:
+    #     rot_y = 90
+    # elif rot_y < 0:
+    #     rot_y = 0
+    # if rot_z > 360:
+    #     rot_z = 360
+    # elif rot_z < 0:
+    #     rot_z = 0
     xStart = x
     yStart = y 
     glutPostRedisplay()
@@ -131,7 +146,7 @@ def rysuj_teren(w, h):
                 szecian(x, y, 0, h)
             if ziemia[x][y].energia > 0:
                 glColor3f(0, 0.5, 0)
-                drzewko(x, y, h, h)
+                drzewko(x, y, h, h, ziemia[x][y].energia)
 
 # obrot
 def polar():
