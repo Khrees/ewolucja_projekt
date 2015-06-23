@@ -4,6 +4,7 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
 import math as m
+import numpy as n
 
 import zwierza
 import teren
@@ -45,10 +46,51 @@ def init():
     glEnable(GL_COLOR_MATERIAL)
 
 # rysowanie szecianu
-def szecian(x, y, z, h):
+def szescian(x, y, z, h):
     glTranslate(x * h - 1, y * h - 1, z)
     glutSolidCube(h)
     glTranslate(-(x * h - 1), -(y * h - 1), -z)
+
+def szescianV(x, y, z, h, tex = 0):
+    glBegin(GL_QUADS)
+
+    # +z
+    glVertex3f(x * h - 1, y * h - 1, z)
+    glVertex3f(x * h + h - 1, y * h - 1, z)
+    glVertex3f(x * h + h - 1, y * h + h - 1, z)
+    glVertex3f(x * h - 1, y * h + h - 1, z)
+
+    # -z
+    glVertex3f(x * h - 1, y * h - 1, z - h)
+    glVertex3f(x * h + h - 1, y * h - 1, z - h)
+    glVertex3f(x * h + h - 1, y * h + h - 1, z - h)
+    glVertex3f(x * h - 1, y * h + h - 1, z - h)
+
+    # +x
+    glVertex3f(x * h + h - 1, y * h - 1, z)
+    glVertex3f(x * h + h - 1, y * h - 1, z - h)
+    glVertex3f(x * h + h - 1, y * h + h - 1, z - h)
+    glVertex3f(x * h + h - 1, y * h + h - 1, z)
+
+    # -x
+    glVertex3f(x * h - 1, y * h - 1, z)
+    glVertex3f(x * h - 1, y * h + h - 1, z)
+    glVertex3f(x * h - 1, y * h + h - 1, z - h)
+    glVertex3f(x * h - 1, y * h - 1, z - h)
+
+    # +y
+    glVertex3f(x * h - 1, y * h + h - 1, z)
+    glVertex3f(x * h + h - 1, y * h + h - 1, z)
+    glVertex3f(x * h + h - 1, y * h + h - 1, z - h)
+    glVertex3f(x * h - 1, y * h + h - 1, z - h)
+
+    # -y
+    glVertex3f(x * h - 1, y * h - 1, z)
+    glVertex3f(x * h - 1, y * h - 1, z - h)
+    glVertex3f(x * h + h - 1, y * h - 1, z - h)
+    glVertex3f(x * h + h - 1, y * h - 1, z)
+
+    glEnd()
 
 # rysowanie sfery
 def sfera(x, y, z, h):
@@ -140,10 +182,10 @@ def rysuj_teren(w, h):
         for y in range(rozmiar):
             if type(ziemia[x][y]) is teren.Pustynia:
                 glColor3f(1, 1, 0)
-                szecian(x, y, 0, h)
+                szescian(x, y, 0, h)
             elif type(ziemia[x][y]) is teren.Dzunkla:
                 glColor3f(0, 1, 0)
-                szecian(x, y, 0, h)
+                szescian(x, y, 0, h)
             if ziemia[x][y].energia > 0:
                 glColor3f(0, 0.5, 0)
                 drzewko(x, y, h, h, ziemia[x][y].energia)
