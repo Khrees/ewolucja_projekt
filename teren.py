@@ -18,7 +18,7 @@ class Pustynia(Teren):
     def __init__(self, pozycja=0):
         Teren.__init__(self, pozycja=0)
         self.pozycja = pozycja
-        self.szansa_na_wzrost = 0.5
+        self.szansa_na_wzrost = 0.01
 
 
 class Dzunkla(Teren):

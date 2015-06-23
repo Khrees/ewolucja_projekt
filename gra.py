@@ -6,6 +6,7 @@ from OpenGL.GLUT import *
 import zwierza
 import teren
 
+f = open('plik.txt', 'w')
 dzien = 0
 rozmiar = 100
 poczatkowa_liczba_zwierzat = 50
@@ -73,12 +74,14 @@ def wyswietlanie():
     for krolik in lista_zwierzat:
         krolik.zycie_jest_nowela(lista_zwierzat, ziemia)
 
-    print(len(lista_zwierzat))
+    f.write(repr(len(lista_zwierzat)))
+    f.write('\n')
     dzien += 1
 
     glFlush()
 
     if len(lista_zwierzat) == 0:
+        f.close()
         sys.exit()
 
 # OpenGL
