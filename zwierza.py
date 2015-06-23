@@ -22,7 +22,7 @@ class Zwierz(object):
                 self.genom[r.randint(0, 7)] += r.randint(-2, 2)
 
     def rusz_sie(self, rozmiar=100):
-        self.energia -= 2
+        # self.energia -= 4
         kierunek = r.randint(0, 7)
 
         if kierunek == 0:
@@ -78,7 +78,7 @@ class Zwierz(object):
     def zycie_jest_nowela(self, lista_zwierzat, ziemia):
         self.czy_ma_co_jesc(ziemia)
         self.czy_umrze(lista_zwierzat)
-        self.rozmnazaj_sie(lista_zwierzat)
+        # self.rozmnazaj_sie(lista_zwierzat)
         self.czas_zycia += 1
 
     def jedz(self, drzewo):
