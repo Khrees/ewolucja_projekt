@@ -21,7 +21,7 @@ class Zwierz(object):
                 self.energia = 100
                 self.genom[r.randint(0, 7)] += r.randint(-2, 2)
 
-    def przelicz_szykosc(self):
+    def przelicz_szybkosc(self):
         self.szybkosc = sum(self.genom)
 
     def rusz_sie(self, rozmiar=100):

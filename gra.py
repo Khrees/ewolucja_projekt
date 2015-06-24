@@ -3,15 +3,15 @@ __author__ = 'illmoded'
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
-from Image import *
+import Image as Im
 
 import zwierza
 import teren
 
-# f = open('plik.txt', 'w')
+# f = open('hist.txt', 'w')
 dzien = 0
-rozmiar = 66
-poczatkowa_liczba_zwierzat = 60
+rozmiar = 50
+poczatkowa_liczba_zwierzat = 20
 
 rot_x = 60.
 rot_y = 0.
@@ -47,7 +47,7 @@ def init():
 
 
 def loadtexture(plik):
-    image = open(plik)
+    image = Im.open(plik)
     x = image.size[0]
     y = image.size[1]
     texdata = image.tostring("raw", "RGBX", 0)
@@ -162,7 +162,7 @@ def klawiatura(*args):
 
 
 # funkcja przyciskow myszy (do zmiany)
-def mysz(button, x, y):
+def mysz(button, state, x, y):
     global action, xStart, yStart
     if button == GLUT_LEFT_BUTTON:
         if glutGetModifiers() == GLUT_ACTIVE_SHIFT:
@@ -184,7 +184,7 @@ def ruch(x, y):
         rot_x -= y - yStart
         rot_y -= x - xStart
     elif action == "MOVE_EYE_2":
-        rot_z += x - yStart
+        rot_z += x - xStart
     elif action == "TRANS":
         xTrans += y - yStart
         yTrans += x - xStart
@@ -294,13 +294,13 @@ def rysuj():
     # ######################## szybkosci ########################
     lista_szybkosci = []
     for k in lista_zwierzat:
-        k.przelicz_predkosc()
+        k.przelicz_szybkosc()
         lista_szybkosci.append(k.szybkosc)
     # ###########################################################
 
     # f.write(repr(len(lista_zwierzat)))
     # f.write('\n')
-    print len(lista_zwierzat)
+    # print len(lista_zwierzat)
     dzien += 1
 
     glPopMatrix()
