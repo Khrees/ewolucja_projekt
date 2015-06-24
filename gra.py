@@ -28,10 +28,11 @@ yTrans = 0.
 ziemia = teren.generuj_teren(rozmiar)
 lista_zwierzat = zwierza.generuj_zwierzeta(poczatkowa_liczba_zwierzat, rozmiar)
 
+
 def init():
     glEnable(GL_NORMALIZE)
-    light_ambient =  [1.0, 1.0, 1.0, 0.0]
-    light_position =  [1.0, 1.0, 1.0, 0.0]
+    light_ambient = [1.0, 1.0, 1.0, 0.0]
+    light_position = [1.0, 1.0, 1.0, 0.0]
 
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT, light_ambient)
     # glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient)
@@ -44,19 +45,21 @@ def init():
     glShadeModel(GL_SMOOTH)
     glEnable(GL_COLOR_MATERIAL)
 
-def LoadTexture(file):
-    image   = open(file);
-    x       = image.size[0]
-    y       = image.size[1]
+
+def loadtexture(plik):
+    image = open(plik)
+    x = image.size[0]
+    y = image.size[1]
     texdata = image.tostring("raw", "RGBX", 0)
-    texid   = glGenTextures(1)
-	
+    texid = glGenTextures(1)
+
     glBindTexture(GL_TEXTURE_2D, texid)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, x, y, 0, GL_RGBA, GL_UNSIGNED_BYTE, texdata)
-	
-    return texid  
+
+    return texid
+
 
 # rysowanie szecianu
 def szescian(x, y, z, h):
@@ -64,98 +67,128 @@ def szescian(x, y, z, h):
     glutSolidCube(h)
     glTranslate(-(x * h - 1), -(y * h - 1), -z)
 
-def szescianV(x, y, z, h, tex):
-    glBindTexture(GL_TEXTURE_2D, tex) 
+
+def szescianv(x, y, z, h, tex):
+    glBindTexture(GL_TEXTURE_2D, tex)
     glBegin(GL_QUADS)
 
     # +z
-    glTexCoord2f(0,0); glVertex3f(x * h - 1, y * h - 1, z)
-    glTexCoord2f(0,1); glVertex3f(x * h + h - 1, y * h - 1, z)
-    glTexCoord2f(1,1); glVertex3f(x * h + h - 1, y * h + h - 1, z)
-    glTexCoord2f(1,0); glVertex3f(x * h - 1, y * h + h - 1, z)
+    glTexCoord2f(0, 0)
+    glVertex3f(x * h - 1, y * h - 1, z)
+    glTexCoord2f(0, 1)
+    glVertex3f(x * h + h - 1, y * h - 1, z)
+    glTexCoord2f(1, 1)
+    glVertex3f(x * h + h - 1, y * h + h - 1, z)
+    glTexCoord2f(1, 0)
+    glVertex3f(x * h - 1, y * h + h - 1, z)
 
     # -z
-    glTexCoord2f(0,0); glVertex3f(x * h - 1, y * h - 1, z - h)
-    glTexCoord2f(0,1); glVertex3f(x * h + h - 1, y * h - 1, z - h)
-    glTexCoord2f(1,1); glVertex3f(x * h + h - 1, y * h + h - 1, z - h)
-    glTexCoord2f(1,0); glVertex3f(x * h - 1, y * h + h - 1, z - h)
+    glTexCoord2f(0, 0)
+    glVertex3f(x * h - 1, y * h - 1, z - h)
+    glTexCoord2f(0, 1)
+    glVertex3f(x * h + h - 1, y * h - 1, z - h)
+    glTexCoord2f(1, 1)
+    glVertex3f(x * h + h - 1, y * h + h - 1, z - h)
+    glTexCoord2f(1, 0)
+    glVertex3f(x * h - 1, y * h + h - 1, z - h)
 
     # +x
-    glTexCoord2f(0,0); glVertex3f(x * h + h - 1, y * h - 1, z)
-    glTexCoord2f(0,1); glVertex3f(x * h + h - 1, y * h - 1, z - h)
-    glTexCoord2f(1,1); glVertex3f(x * h + h - 1, y * h + h - 1, z - h)
-    glTexCoord2f(1,0); glVertex3f(x * h + h - 1, y * h + h - 1, z)
+    glTexCoord2f(0, 0)
+    glVertex3f(x * h + h - 1, y * h - 1, z)
+    glTexCoord2f(0, 1)
+    glVertex3f(x * h + h - 1, y * h - 1, z - h)
+    glTexCoord2f(1, 1)
+    glVertex3f(x * h + h - 1, y * h + h - 1, z - h)
+    glTexCoord2f(1, 0)
+    glVertex3f(x * h + h - 1, y * h + h - 1, z)
 
     # -x
-    glTexCoord2f(0,0); glVertex3f(x * h - 1, y * h - 1, z)
-    glTexCoord2f(0,1); glVertex3f(x * h - 1, y * h + h - 1, z)
-    glTexCoord2f(1,1); glVertex3f(x * h - 1, y * h + h - 1, z - h)
-    glTexCoord2f(1,0); glVertex3f(x * h - 1, y * h - 1, z - h)
+    glTexCoord2f(0, 0)
+    glVertex3f(x * h - 1, y * h - 1, z)
+    glTexCoord2f(0, 1)
+    glVertex3f(x * h - 1, y * h + h - 1, z)
+    glTexCoord2f(1, 1)
+    glVertex3f(x * h - 1, y * h + h - 1, z - h)
+    glTexCoord2f(1, 0)
+    glVertex3f(x * h - 1, y * h - 1, z - h)
 
     # +y
-    glTexCoord2f(0,0); glVertex3f(x * h - 1, y * h + h - 1, z)
-    glTexCoord2f(0,1); glVertex3f(x * h + h - 1, y * h + h - 1, z)
-    glTexCoord2f(1,1); glVertex3f(x * h + h - 1, y * h + h - 1, z - h)
-    glTexCoord2f(1,0); glVertex3f(x * h - 1, y * h + h - 1, z - h)
+    glTexCoord2f(0, 0)
+    glVertex3f(x * h - 1, y * h + h - 1, z)
+    glTexCoord2f(0, 1)
+    glVertex3f(x * h + h - 1, y * h + h - 1, z)
+    glTexCoord2f(1, 1)
+    glVertex3f(x * h + h - 1, y * h + h - 1, z - h)
+    glTexCoord2f(1, 0)
+    glVertex3f(x * h - 1, y * h + h - 1, z - h)
 
     # -y
-    glTexCoord2f(0,0); glVertex3f(x * h - 1, y * h - 1, z)
-    glTexCoord2f(0,1); glVertex3f(x * h - 1, y * h - 1, z - h)
-    glTexCoord2f(1,1); glVertex3f(x * h + h - 1, y * h - 1, z - h)
-    glTexCoord2f(1,0); glVertex3f(x * h + h - 1, y * h - 1, z)
+    glTexCoord2f(0, 0)
+    glVertex3f(x * h - 1, y * h - 1, z)
+    glTexCoord2f(0, 1)
+    glVertex3f(x * h - 1, y * h - 1, z - h)
+    glTexCoord2f(1, 1)
+    glVertex3f(x * h + h - 1, y * h - 1, z - h)
+    glTexCoord2f(1, 0)
+    glVertex3f(x * h + h - 1, y * h - 1, z)
 
     glEnd()
+
 
 # rysowanie sfery
 def sfera(x, y, z, h):
     glTranslate(x * h - 1, y * h - 1, z)
-    glutSolidSphere(h/2., 10, 10)
+    glutSolidSphere(h / 2., 10, 10)
     glTranslate(-(x * h - 1), -(y * h - 1), -z)
 
+
 # rysowanie drzew (do zrobienia)
-def drzewko(x, y, z , h, e):
-    N = e/10
-    glTranslate(x * h - 1, y * h - 1, z - h/2.)
-    glutSolidCylinder(h/4., h/4., 10, 10)
-    for i in xrange(1,N):
-        glTranslate(0, 0, i*h/4.)
-        glutSolidCone(h/3., h/4., 10, 10)
-        glTranslate(0, 0, -i*h/4.)
+def drzewko(x, y, z, h, e):
+    n = e / 10
+    glTranslate(x * h - 1, y * h - 1, z - h / 2.)
+    glutSolidCylinder(h / 4., h / 4., 10, 10)
+    for i in xrange(1, n):
+        glTranslate(0, 0, i * h / 4.)
+        glutSolidCone(h / 3., h / 4., 10, 10)
+        glTranslate(0, 0, -i * h / 4.)
         pass
-    glTranslate(-(x * h - 1), -(y * h - 1), -(z - h/2.))
+    glTranslate(-(x * h - 1), -(y * h - 1), -(z - h / 2.))
+
 
 # funkcja klawiatury
 def klawiatura(*args):
     if args[0] == '\033' or args[0] == 'q':
         sys.exit()
 
+
 # funkcja przyciskow myszy (do zmiany)
-def mysz(button, state, x, y):
+def mysz(button, x, y):
     global action, xStart, yStart
-    if (button==GLUT_LEFT_BUTTON):
-        if (glutGetModifiers() == GLUT_ACTIVE_SHIFT):
+    if button == GLUT_LEFT_BUTTON:
+        if glutGetModifiers() == GLUT_ACTIVE_SHIFT:
             action = "MOVE_EYE_2"
         else:
             action = "MOVE_EYE"
-    elif (button==GLUT_MIDDLE_BUTTON):
+    elif button == GLUT_MIDDLE_BUTTON:
         action = "TRANS"
-    elif (button==GLUT_RIGHT_BUTTON):
+    elif button == GLUT_RIGHT_BUTTON:
         action = "ZOOM"
     xStart = x
     yStart = y
 
+
 # funkcja ruchu myszy (do zmiany)
 def ruch(x, y):
     global zoom, xStart, yStart, rot_x, rot_y, rot_z, xTrans, yTrans
-    if (action=="MOVE_EYE"):
+    if action == "MOVE_EYE":
         rot_x -= y - yStart
         rot_y -= x - xStart
-    elif (action=="MOVE_EYE_2"):
+    elif action == "MOVE_EYE_2":
         rot_z += x - yStart
-    elif (action=="TRANS"):
+    elif action == "TRANS":
         xTrans += y - yStart
         yTrans += x - xStart
-    elif (action=="ZOOM"):
+    elif action == "ZOOM":
         zoom -= y - yStart
         if zoom > 150.:
             zoom = 150.
@@ -178,8 +211,9 @@ def ruch(x, y):
     # elif rot_z < 0:
     #     rot_z = 0
     xStart = x
-    yStart = y 
+    yStart = y
     glutPostRedisplay()
+
 
 # zmiana rozmiaru okna (jeszcze do zmiany)
 def reshape(w, h):
@@ -190,31 +224,34 @@ def reshape(w, h):
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
 
+
 # rysowanie terenu
-def rysuj_teren(w, h):
+def rysuj_teren(h):
     for x in range(rozmiar):
         for y in range(rozmiar):
             if type(ziemia[x][y]) is teren.Pustynia:
-            	glEnable(GL_TEXTURE_2D) 
+                glEnable(GL_TEXTURE_2D)
                 glColor3f(1, 1, 0)
-                szescianV(x, y, 0, h, wyswietlanie.texid)
-                glDisable(GL_TEXTURE_2D) 
+                szescianv(x, y, 0, h, wyswietlanie.texid)
+                glDisable(GL_TEXTURE_2D)
             elif type(ziemia[x][y]) is teren.Dzunkla:
-            	glEnable(GL_TEXTURE_2D) 
+                glEnable(GL_TEXTURE_2D)
                 glColor3f(0, 1, 0)
-                szescianV(x, y, 0, h, wyswietlanie.texid2)
+                szescianv(x, y, 0, h, wyswietlanie.texid2)
                 glDisable(GL_TEXTURE_2D)
             if ziemia[x][y].energia > 0:
                 glColor3f(0, 0.5, 0)
                 drzewko(x, y, h, h, ziemia[x][y].energia)
 
+
 # obrot
 def polar():
-    glTranslatef( yTrans/100., 0.0, 0.0 )
-    glTranslatef(  0.0, -xTrans/100., 0.0)
-    glRotatef( -rot_z, 0.0, 0.0, 1.0)
-    glRotatef( -rot_x, 1.0, 0.0, 0.0)
-    glRotatef( -rot_y, .0, 1.0, 0.0)
+    glTranslatef(yTrans / 100., 0.0, 0.0)
+    glTranslatef(0.0, -xTrans / 100., 0.0)
+    glRotatef(-rot_z, 0.0, 0.0, 1.0)
+    glRotatef(-rot_x, 1.0, 0.0, 0.0)
+    glRotatef(-rot_y, .0, 1.0, 0.0)
+
 
 # ustawienia obrotow
 def wyswietlanie():
@@ -226,7 +263,7 @@ def wyswietlanie():
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
 
-    gluLookAt (0, 0, eyesz, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0)
+    gluLookAt(0, 0, eyesz, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0)
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
     gluPerspective(zoom, 1, maxzoom, minzoom)
@@ -234,14 +271,15 @@ def wyswietlanie():
     polar()
     rysuj()
 
+
 # rysowanie
 def rysuj():
     global dzien
     h = 2. / rozmiar
-    w = 2. / rozmiar
+    # w = 2. / rozmiar
 
     glPushMatrix()
-    rysuj_teren(w, h)
+    rysuj_teren(h)
     teren.tworzenie_lasow(ziemia)
 
     for krolik in lista_zwierzat:
@@ -277,6 +315,6 @@ glutKeyboardFunc(klawiatura)
 glutMouseFunc(mysz)
 glutMotionFunc(ruch)
 glutReshapeFunc(reshape)
-wyswietlanie.texid = LoadTexture("tex/sand.jpg")
-wyswietlanie.texid2 = LoadTexture("tex/grass.jpg")
+wyswietlanie.texid = loadtexture("tex/sand.jpg")
+wyswietlanie.texid2 = loadtexture("tex/grass.jpg")
 glutMainLoop()
