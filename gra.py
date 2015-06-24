@@ -10,13 +10,13 @@ import teren
 
 # f = open('hist.txt', 'w')
 dzien = 0
-<<<<<<< HEAD
+
 rozmiar = 50
 poczatkowa_liczba_zwierzat = 20
-=======
+
 rozmiar = 100
 poczatkowa_liczba_zwierzat = 55
->>>>>>> mojeitylkomoje
+
 
 rot_x = 60.
 rot_y = 0.
