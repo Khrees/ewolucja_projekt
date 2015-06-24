@@ -11,7 +11,7 @@ class Zwierz(object):
         self.x = x
         self.y = y
         self.genom = []
-        self.szybkosc = sum(self.genom)
+        self.szybkosc = 0
 
     def rozmnazaj_sie(self, lista_zwierzat, dojrzalosc=20, libido=50):
         if self.czas_zycia >= dojrzalosc and self.energia >= libido:
@@ -20,6 +20,9 @@ class Zwierz(object):
                 self.czas_zycia = 0
                 self.energia = 100
                 self.genom[r.randint(0, 7)] += r.randint(-2, 2)
+
+    def przelicz_szykosc(self):
+        self.szybkosc = sum(self.genom)
 
     def rusz_sie(self, rozmiar=100):
         self.energia -= 3

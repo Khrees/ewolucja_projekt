@@ -291,6 +291,13 @@ def rysuj():
     for krolik in lista_zwierzat:
         krolik.zycie_jest_nowela(lista_zwierzat, ziemia)
 
+    # ######################## szybkosci ########################
+    lista_szybkosci = []
+    for k in lista_zwierzat:
+        k.przelicz_predkosc()
+        lista_szybkosci.append(k.szybkosc)
+    # ###########################################################
+
     # f.write(repr(len(lista_zwierzat)))
     # f.write('\n')
     print len(lista_zwierzat)
