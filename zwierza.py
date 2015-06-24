@@ -18,11 +18,11 @@ class Zwierz(object):
                 self.energia /= 2
                 lista_zwierzat.append(copy.deepcopy(self))
                 self.czas_zycia = 0
-                self.energia = 80
+                self.energia = 8
                 self.genom[r.randint(0, 7)] += r.randint(-2, 2)
-	
-	def przelicz_szybkosc(self):
-		self.szybkosc = sqrt(sum(self.genom))
+
+    def przelicz_szybkosc(self):
+        self.szybkosc = sum(self.genom)
 
     def rusz_sie(self, rozmiar=100):
         self.energia -= 5
