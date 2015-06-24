@@ -18,11 +18,11 @@ class Zwierz(object):
                 self.energia /= 2
                 lista_zwierzat.append(copy.deepcopy(self))
                 self.czas_zycia = 0
-                self.energia = 100
+                self.energia = 80
                 self.genom[r.randint(0, 7)] += r.randint(-2, 2)
 
     def rusz_sie(self, rozmiar=100):
-        self.energia -= 3
+        self.energia -= 5
         kierunek = r.randint(0, 7)
 
         if kierunek == 0:
