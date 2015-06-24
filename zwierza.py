@@ -13,7 +13,7 @@ class Zwierz(object):
         self.genom = []
         self.szybkosc = sum(self.genom)
 
-    def rozmnazaj_sie(self, lista_zwierzat, dojrzalosc=20, libido=50):
+    def rozmnazaj_sie(self, lista_zwierzat, dojrzalosc=25, libido=50):
         if self.czas_zycia >= dojrzalosc and self.energia >= libido:
                 self.energia /= 2
                 lista_zwierzat.append(copy.deepcopy(self))
@@ -22,7 +22,7 @@ class Zwierz(object):
                 self.genom[r.randint(0, 7)] += r.randint(-2, 2)
 
     def rusz_sie(self, rozmiar=100):
-        self.energia -= 6
+        self.energia -= 3
         kierunek = r.randint(0, 7)
 
         if kierunek == 0:
@@ -82,8 +82,9 @@ class Zwierz(object):
         self.czas_zycia += 1
 
     def jedz(self, drzewo):
-        self.energia += 5 
-        drzewo.energia -= 5
+        if drzewo.energia >= 20:
+            self.energia += 20 
+            drzewo.energia -= 20
 
 
 def generuj_zwierzeta(ilosc, rozmiar):

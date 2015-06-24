@@ -10,8 +10,8 @@ class Teren(object):
         self.szansa_na_wzrost = 0
 
     # @property
-    def rosnie_drzewo(self):
-        self.energia += 10
+    # def rosnie_drzewo(self):
+    #     self.energia += 10
 
 
 class Pustynia(Teren):
@@ -19,6 +19,8 @@ class Pustynia(Teren):
         Teren.__init__(self, pozycja=0)
         self.pozycja = pozycja
         self.szansa_na_wzrost = 0.01
+    def rosnie_drzewo(self):
+        self.energia +=20
 
 
 class Dzunkla(Teren):
@@ -26,6 +28,9 @@ class Dzunkla(Teren):
         Teren.__init__(self, pozycja=0)
         self.pozycja = pozycja
         self.szansa_na_wzrost = 5
+    def rosnie_drzewo(self):
+        if self.energia <150:
+            self.energia +=30
 
 p = Pustynia()
 d = Dzunkla()

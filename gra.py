@@ -12,7 +12,7 @@ import teren
 f = open('plik.txt', 'w')
 dzien = 0
 rozmiar = 100
-poczatkowa_liczba_zwierzat = 50
+poczatkowa_liczba_zwierzat = 60
 
 rot_x = 0.
 rot_y = 0.
